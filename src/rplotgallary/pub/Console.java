@@ -29,24 +29,22 @@ import rplotgallary.stackPlot.DrawStackplot;
 public class Console {
     public static void main(String[] args) throws IOException, FileNotFoundException, ParserConfigurationException {
         if(args.length==0){
-            System.out.println("Java based Data Analysis tool, version 1.2\r\n");
+            System.out.println("Java based Data plot tool, version 1.2\r\n");
             System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help\r\n");
         }else if(args[0].endsWith("-h")){
-            System.out.println("Java based Data Analysis tool, version 1.1\r\n");  
+            System.out.println("Java based Data plot tool, version 1.2\r\n");  
             System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help\r\n");
             System.out.println("======Draw boxplot:  \r\n\t\tCMD : java -jar RplotGallary.jar -boxplot datafile [outputpath] isgui(T/F)\r\n");
            System.out.println("======Draw correlation plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -correlation datafile samplename1 samplename2 [outputpath] isgui(T/F)\r\n");
              System.out.println("======Draw PCA analysis & plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -pca datafile conditionstr(like:Control,Control,Control,Treated,Treated,Treated) isText(T/F) [outputpath] isgui(T/F)\r\n");
             System.out.println("======Draw Stack plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -stack datafile [outputpath] isgui(T/F)\r\n");
              System.out.println("======Draw barRatio plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -barRatio datafile [outputpath] isgui(T/F)\r\n");
-            System.out.println("======Draw barRatio plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile [outputpath] isgui(T/F)\r\n");
-            System.out.println("======Draw heatmap plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile [outputpath] isgui(T/F)\r\n");
+           System.out.println("======Draw heatmap plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile [outputpath] isgui(T/F)\r\n");
             System.out.println(" heatmap with more parameters \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile genenumber(default:30) isShowKey(T/F) isdisplayNumbers(T/F) [outputpath] isgui(T/F)\r\n");
            System.out.println("Type -updateinfor to view update information");
         }  else if (args[0].endsWith("-updateinfor")) {
              System.out.println("\r\nUpdate information\r\n");
-            System.out.println("\r\n1.1. Modified \"Extract expression data from cufflinks outputfile\", addheader information");
-             System.out.println("\r\n1.2. Add go mapping based on genelist function");
+           
        
         }else if (args[0].endsWith("-boxplot")) {
             if (args.length == 4) {
@@ -120,9 +118,9 @@ public class Console {
                    
             } else if (args.length == 3) {
                  if( args[2].equals("T")){
-                    new DrawStackplot(args[1], "./boxplot",true);
+                    new DrawStackplot(args[1], "./stack",true);
                 }else{
-                    new DrawStackplot(args[1], "./boxplot",false);
+                    new DrawStackplot(args[1], "./stack",false);
                 }
               
             } else {
@@ -139,9 +137,9 @@ public class Console {
                    
             } else if (args.length == 3) {
                  if( args[2].equals("T")){
-                    new DrawRatioBarplot(args[1], "./boxplot",true);
+                    new DrawRatioBarplot(args[1], "./barRatio",true);
                 }else{
-                    new DrawRatioBarplot(args[1], "./boxplot",false);
+                    new DrawRatioBarplot(args[1], "./barRatio",false);
                 }
               
             } else {
@@ -158,9 +156,9 @@ public class Console {
                    
             } else if (args.length == 3) {
                  if( args[2].equals("T")){
-                    new DrawHeatmap(args[1], "./boxplot",true);
+                    new DrawHeatmap(args[1], "./heatmap",true);
                 }else{
-                    new DrawHeatmap(args[1], "./boxplot",false);
+                    new DrawHeatmap(args[1], "./heatmap",false);
                 }
               
             } if (args.length == 7) {
@@ -173,9 +171,9 @@ public class Console {
                    
             } else if (args.length == 6) {
                  if( args[2].equals("T")){
-                    new DrawHeatmap(args[1], Integer.parseInt(args[2]),args[3],args[4], "./boxplot",true);
+                    new DrawHeatmap(args[1], Integer.parseInt(args[2]),args[3],args[4], "./heatmap",true);
                 }else{
-                    new DrawHeatmap(args[1], Integer.parseInt(args[2]),args[3],args[4], "./boxplot",false);
+                    new DrawHeatmap(args[1], Integer.parseInt(args[2]),args[3],args[4], "./heatmap",false);
                 }
               
             } else {

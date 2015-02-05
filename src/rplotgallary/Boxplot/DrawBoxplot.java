@@ -26,12 +26,14 @@ public class DrawBoxplot {
      try {
          RscriptGenerator rg=new RscriptGenerator(datafile,  outpath);
          String rscriptpath=rg.getRscriptpath();
+//          System.out.println("monitor position:"+rscriptpath);
          String plotpath=rg.getPlotpath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isgui){
               Image img=ImageIO.read(new File(plotpath));
               new ImageFrame(img);
           }
+//          System.out.println("monitor position:"+rscriptpath);
          System.out.println("Your plot is located in "+plotpath);
      } catch (IOException ex) {
          Logger.getLogger(DrawBoxplot.class.getName()).log(Level.SEVERE, null, ex);
