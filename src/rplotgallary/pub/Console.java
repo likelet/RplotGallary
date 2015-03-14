@@ -23,13 +23,13 @@ import rplotgallary.stackPlot.DrawStackplot;
 /**
  *
  * @author ZHAO Qi
- * @date 2014-3-6 10:32:12
+ * @date 2015-3-14 10:32:12
  * @version 1.6.0
  */
 public class Console {
     public static void main(String[] args) throws IOException, FileNotFoundException, ParserConfigurationException {
         if(args.length==0){
-            System.out.println("Java based Data Analysis tool, version 1.2\r\n");
+            System.out.println("Rplot tools tool, version 1.2\r\n");
             System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help\r\n");
         }else if(args[0].endsWith("-h")){
             System.out.println("Java based Data Analysis tool, version 1.1\r\n");  
@@ -43,6 +43,10 @@ public class Console {
             System.out.println("======Draw heatmap plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile [outputpath] isgui(T/F)\r\n");
             System.out.println(" heatmap with more parameters \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile genenumber(default:30) isShowKey(T/F) isdisplayNumbers(T/F) [outputpath] isgui(T/F)\r\n");
            System.out.println("Type -updateinfor to view update information");
+           System.out.println(" ===================================================================");
+            System.out.println("           Authored by Qi ZHAO. email: zhaoqi3@mail2.sysu.edu.cn\n"
+                    + "Ren's Lab ,Key Laboratory of Biocontrol, School of Life Sciences, Sun Yat-sen University");
+            System.out.println(" ===================================================================");
         }  else if (args[0].endsWith("-updateinfor")) {
              System.out.println("\r\nUpdate information\r\n");
             System.out.println("\r\n1.1. Modified \"Extract expression data from cufflinks outputfile\", addheader information");

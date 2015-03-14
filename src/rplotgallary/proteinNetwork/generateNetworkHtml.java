@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.web.WebView;
 import javax.imageio.ImageIO;
 import rplotgallary.pub.ImageFrame;
 import rplotgallary.pub.Rexe;
+import test.Browser;
 
 /**
  *
@@ -26,19 +28,22 @@ public class generateNetworkHtml {
      try {
          RscriptGenerator rg=new RscriptGenerator(datafile,  outpath);
          String rscriptpath=rg.getRscriptpath();
-         String plotpath=rg.getHtmlPath();
+         String htmlPath=rg.getHtmlPath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isgui){
-              Image img=ImageIO.read(new File(plotpath));
-              new ImageFrame(img);
-          }
-         System.out.println("Your plot is located in "+plotpath);
-     } catch (IOException ex) {
-         Logger.getLogger(generateNetworkHtml.class.getName()).log(Level.SEVERE, null, ex);
-     }
-        
+             
+// ..
+         
+
+            }
+            System.out.println("Your plot is located in \"" + htmlPath + "\"");
+        } catch (IOException ex) {
+            Logger.getLogger(generateNetworkHtml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
+
     public static void main(String[] args) {
-      new generateNetworkHtml("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv","C:\\Users\\Administrator\\Desktop\\fornie\\network",false);  
+      new generateNetworkHtml("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv","network",true);  
     }
 }
