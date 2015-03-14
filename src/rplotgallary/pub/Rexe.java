@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 public class Rexe {
     
      ArrayList<File> filelist=new ArrayList<File>();
+     final  String linuxRpath="Rscript";
+     final  String windowsRpath="Rcmd.exe";
 
     public Rexe(String Rdir) {
         try {
@@ -78,7 +80,7 @@ public class Rexe {
             if (tempfile.getName().endsWith(".R")) {
                 Process process = null;
                 //process = Runtime.getRuntime().exec("cd F:/mywork/project/MTanalysis/ForR");
-                process = Runtime.getRuntime().exec("\"E:\\Program Files\\R\\R-3.1.0\\bin\\x64\\Rcmd.exe\" BATCH " + tempfile.getAbsolutePath());
+                process = Runtime.getRuntime().exec("\""+this.windowsRpath+"\" BATCH " + tempfile.getAbsolutePath());
                 InputStream errorst = process.getErrorStream();
                 int result = process.waitFor();
                 if (result == 0) {
@@ -115,7 +117,7 @@ public class Rexe {
                 Process process = null;
                 //process = Runtime.getRuntime().exec("cd F:/mywork/project/MTanalysis/ForR");
                 process = Runtime.getRuntime().exec("chmod 755 " + tempfile.getAbsolutePath());
-                process = Runtime.getRuntime().exec("/home/cuckoo/software/R/R-3.0.3/bin/Rscript " + tempfile.getAbsolutePath());
+                process = Runtime.getRuntime().exec(this.linuxRpath+ " " + tempfile.getAbsolutePath());
                 InputStream errorst = process.getErrorStream();
                 int result = process.waitFor();
                 if (result == 0) {
@@ -142,7 +144,7 @@ public class Rexe {
             if (tempfile.getName().endsWith(".R")) {
                 Process process = null;
                 //process = Runtime.getRuntime().exec("cd F:/mywork/project/MTanalysis/ForR");
-                process = Runtime.getRuntime().exec("\"E:\\Program Files\\R\\R-3.1.2\\bin\\x64\\Rcmd.exe\" BATCH " + tempfile.getAbsolutePath());
+                process = Runtime.getRuntime().exec("\""+this.windowsRpath+"\" BATCH " + tempfile.getAbsolutePath());
                 InputStream errorst = process.getErrorStream();
                 int result = process.waitFor();
                 if (result == 0) {
