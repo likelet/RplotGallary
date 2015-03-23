@@ -24,6 +24,7 @@ public class RscriptGenerator {
     private String iskey="TRUE";
     private boolean displaynumber=false;
     private int headnumber=30;
+    private String[] colorlist={"red", "black", "green"};
 
     public RscriptGenerator(String datafile, int headnumber,String iskey, boolean displaynumber,String outpath) throws IOException {
         this.datafile = new File(datafile);
@@ -45,6 +46,7 @@ public class RscriptGenerator {
         Rscriptpath = File.createTempFile("tempR", ".R");
         Rscriptpath.deleteOnExit();
         FileWriter fw = new FileWriter(Rscriptpath);
+        String colorstr=" colorRampPalette(c(\""+colorlist[0]+"\",\""+colorlist[1]+"\",\""+colorlist[2]+"\"))(100)";
 
         //System.out.println(intervalstr+"\r\n"+integerstri);
         try {
@@ -62,13 +64,13 @@ public class RscriptGenerator {
             str += "df<-head(df,n="+this.headnumber+")\r\n";
             str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
             if(this.displaynumber){
-            str += "pheatmap(df, trace=\"none\",color=greenred(75),border_color=\"white\",margin=c(13, 13),legend="+this.iskey+",display_numbers = TRUE,number_format =\"%.1e\")\r\n"; 
+            str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+",display_numbers = TRUE,number_format =\"%.1e\")\r\n"; 
             }else{
-                str += "pheatmap(df, trace=\"none\",color=greenred(75),border_color=\"white\",margin=c(13, 13),legend="+this.iskey+")\r\n"; 
+                str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+")\r\n"; 
            
             }
             str += "stackedBarP(df)\r\n";
-            str += "dev.off()\r\n;";
+            str += "dev.off()\r\n";
 
             fw.append(str);
 
@@ -87,6 +89,28 @@ public class RscriptGenerator {
     public String getPlotpath() {
         return new File(plotpath).getAbsolutePath();
     }
+
+    public void setColorlist(String colorlist) {
+        this.colorlist = colorlist.split(",");
+    }
+
+    public void setPlotpath(String plotpath) {
+        this.plotpath = plotpath;
+    }
+
+    public void setIskey(String iskey) {
+        this.iskey = iskey;
+    }
+
+    public void setDisplaynumber(boolean displaynumber) {
+        this.displaynumber = displaynumber;
+    }
+
+    public void setHeadnumber(int headnumber) {
+        this.headnumber = headnumber;
+    }
+    
+   
 
     public static void main(String[] args) throws IOException {
          //ArrayList<String> list1=Lengthdistribution.getIntervalList(0, 3000, 300);

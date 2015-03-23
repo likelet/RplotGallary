@@ -24,25 +24,75 @@ public class RscriptGenerator {
     private String plotpath;
     private File datafile;
 
-    private boolean isRow ;
-    private boolean isText;
-    private String conditionstr="";//condition group infomation for PCA color option, this parameter'length must be as same as your sample numner
-    //and is comma-delimted
+//    private boolean isRow=true;
+    private boolean isText = true;
+    private String conditionstr = "";//condition group infomation for PCA color option, this parameter'length must be as same as your sample numner
+    private String[] plotdim = {"PC1", "PC2"};
+//and is comma-delimted
 
     public RscriptGenerator(String datafile, String conditionlist, boolean isText, String outpath) throws IOException {
         this.datafile = new File(datafile);
         this.plotpath = outpath;
-        this.isRow = isRow;
+//        this.isRow = isRow;
         this.isText = isText;
-        this.conditionstr=("c(\""+conditionlist+"\")").replace(",", "\",\"");
+        this.conditionstr = ("c(\"" + conditionlist + "\")").replace(",", "\",\"");
         this.process();
+    }
+
+    public RscriptGenerator(String datafile, String conditionlist, boolean isText, String outpath, String PC) throws IOException {
+        this.datafile = new File(datafile);
+        this.plotpath = outpath;
+//        this.isRow = isRow;
+        this.isText = isText;
+        this.conditionstr = ("c(\"" + conditionlist + "\")").replace(",", "\",\"");
+        this.plotdim = PC.split(",");
+        this.process();
+    }
+
+    public RscriptGenerator(String datafile, String conditionlist, String outpath) throws IOException {
+        this.datafile = new File(datafile);
+        this.plotpath = outpath;
+//        this.isRow = isRow;
+        this.conditionstr = ("c(\"" + conditionlist + "\")").replace(",", "\",\"");
+    }
+
+    public File getDatafile() {
+        return datafile;
+    }
+
+    public void setDatafile(File datafile) {
+        this.datafile = datafile;
+    }
+
+    public boolean isIsText() {
+        return isText;
+    }
+
+    public void setIsText(boolean isText) {
+        this.isText = isText;
+    }
+
+    public String getConditionstr() {
+        return conditionstr;
+    }
+
+    public void setConditionstr(String conditionstr) {
+        this.conditionstr = conditionstr;
+    }
+
+    public String[] getPlotdim() {
+        return plotdim;
+    }
+
+    public void setPlotdim(String plotdim) {
+        this.plotdim = plotdim.split(",");
     }
 
     public void process() throws IOException {
 
         String str = "";
         Rscriptpath = File.createTempFile("tempR", ".R");
-//        Rscriptpath.deleteOnExit();
+        Rscriptpath.deleteOnExit();
         FileWriter fw = new FileWriter(Rscriptpath);
 
         //System.out.println(intervalstr+"\r\n"+integerstri);
@@ -71,51 +121,43 @@ public class RscriptGenerator {
                     + "\n"
                     + "#get ggplot2 output result\n"
                     + "getPCAplot <- function(data,conditionlist,isText=FALSE){\n"
-                    + "  if(isText){\n"
                     + "    a<-dataForPCAinitialize(data,conditionlist)\n"
                     + "    pca <-PCA(a[,2:ncol(a)], scale.unit=T, graph=F)\n"
-                    + "    PC1 <- pca$ind$coord[,1]\n"
-                    + "    PC2 <- pca$ind$coord[,2]\n"
-                    + "    plotdata <- data.frame(Condition=a[,1],PC1,PC2) \n"
+                    + "    ctri<-pca$eig[,2]\n"
+                    + "    names(ctri)<-c(\"PC1\",\"PC2\",\"PC3\",\"PC4\",\"PC5\")\n"
+                    + "    xlabtemp=paste(\"" + this.plotdim[0] + " (\",round(ctri[\"" + this.plotdim[0] + "\"],2),\"%)\",sep=\"\")\n"
+                    + "    ylabtemp=paste(\"" + this.plotdim[1] + " (\",round(ctri[\"" + this.plotdim[1] + "\"],2),\"%)\",sep=\"\")\n"
+                    + "    colnames(pca$ind$coord)<-c(\"PC1\",\"PC2\",\"PC3\",\"PC4\",\"PC5\")\n"
+                    + "    " + this.plotdim[0] + " <- pca$ind$coord[,\"" + this.plotdim[0] + "\"]\n"
+                    + "    " + this.plotdim[1] + " <- pca$ind$coord[,\"" + this.plotdim[1] + "\"]\n"
+                    + "    maxX=max(" + this.plotdim[0] + ")*1.5\n"
+                    + "    maxY=max(" + this.plotdim[1] + ")*1.5\n"
+                    + "    plotdata <- data.frame(Condition=a[,1]," + this.plotdim[0] + "," + this.plotdim[1] + ") \n"
                     + "    plotdata$Condition <- factor(plotdata$Condition)\n"
-                    + "    plot <- ggplot(plotdata, aes(PC1, PC2),environment = environment()) + \n"
+                    + "    plot <- ggplot(plotdata, aes(" + this.plotdim[0] + "," + this.plotdim[1] + "),environment = environment()) + \n"
                     + "      geom_point(aes(colour = Condition,shape = Condition),size = 5) + \n"
-                    + "      geom_text(aes(label=rownames(plotdata)), size=5, hjust=0.5, vjust=-0.5)+\n"
+                    
                     + "      theme(panel.border = element_rect(linetype = \"dashed\")) + \n"
-                    + "      theme_bw() + \n"
+                    + "      theme_bw() +\n"
+                    + "      ylim(-maxY,maxY)+\n"
+                    + "xlim(-maxX,maxX)+\n"
+                    + "    scale_y_continuous(ylabtemp)+ scale_x_continuous(xlabtemp)+\n"
                     + "      theme(legend.text = element_text(colour=\"blue\", size = 16, face = \"bold\")) + \n"
                     + "      theme(legend.justification=c(1,0),legend.position=\"top\")+\n"
                     + "      theme(legend.title = element_text(colour=\"black\", size=16, face=\"bold\"))+\n"
                     + "      scale_fill_brewer(palette=\"Spectral\")\n"
-                    + "    return(plot)\n"
-                    + "  }else{\n"
-                    + "  a<-dataForPCAinitialize(data,conditionlist)\n"
-                    + "  pca <-PCA(a[,2:ncol(a)], scale.unit=T, graph=F)\n"
-                    + "  PC1 <- pca$ind$coord[,1]\n"
-                    + "  PC2 <- pca$ind$coord[,2]\n"
-                    + "  plotdata <- data.frame(Condition=a[,1],PC1,PC2) \n"
-                    + "  plotdata$Condition <- factor(plotdata$Condition)\n"
-                    + "  plot <- ggplot(plotdata, aes(PC1, PC2)) + \n"
-                    + "         geom_point(aes(colour = Condition,shape = Condition),size = 5) + \n"
-                    + "         theme(panel.border = element_rect(linetype = \"dashed\")) + \n"
-                    + "         theme_bw() + \n"
-                    + "         theme(legend.text = element_text(colour=\"blue\", size = 16, face = \"bold\")) + \n"
-                    + "    theme(legend.justification=c(1,0),legend.position=\"top\")+\n"
-                    + "         theme(legend.title = element_text(colour=\"black\", size=16, face=\"bold\"))+\n"
-                    + "    scale_fill_brewer(palette=\"Spectral\")\n"
-                    + "  print(plot)\n"
-                    + "  \n"
-                    + "  }\n"
-                    + " \n"
-                    + " \n"
+                    + "    if(isText){\n"
+                    + "      plot<-plot+geom_text(aes(label=rownames(plotdata)), size=5, hjust=0.5, vjust=-0.5)\n"
+                    + "    }\n"
+                    + "    print(plot)\n"
                     + "}\r\n";
             str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
-            if(isText){
+            if (isText) {
                 str += "getPCAplot(df," + this.conditionstr + ",isText=TRUE)\r\n";
-            }else{
-                str += "getPCAplot(df," + this.conditionstr + ")\r\n";
+            } else {
+                str += "getPCAplot(df," + this.conditionstr + ",isText=FALSE)\r\n";
             }
-            str += "dev.off()\r\n;";
+            str += "dev.off()\r\n";
 
             fw.append(str);
             System.out.println(this.conditionstr);

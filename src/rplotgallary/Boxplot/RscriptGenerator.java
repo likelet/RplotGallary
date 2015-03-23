@@ -86,7 +86,7 @@ public class RscriptGenerator {
                 "}\r\n";
                 str+="png(\""+plotpath+"\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
                 str+="samplePlotboxP(df)\r\n";
-                str+="dev.off()\r\n;";
+                str+="dev.off()\r\n";
                 
                 fw.append(str);
                 

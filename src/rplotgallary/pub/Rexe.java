@@ -22,7 +22,7 @@ public class Rexe {
     
      ArrayList<File> filelist=new ArrayList<File>();
      final  String linuxRpath="Rscript";
-     final  String windowsRpath="Rcmd.exe";
+     final  String windowsRpath="E:\\Program Files\\R\\R-3.1.2\\bin\\x64\\Rcmd.exe";
 
     public Rexe(String Rdir) {
         try {

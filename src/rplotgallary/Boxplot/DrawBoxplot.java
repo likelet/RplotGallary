@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import rplotgallary.pub.FunctionClass;
 import rplotgallary.pub.ImageFrame;
 import rplotgallary.pub.Rexe;
 
@@ -33,6 +34,7 @@ public class DrawBoxplot {
               Image img=ImageIO.read(new File(plotpath));
               new ImageFrame(img);
           }
+          FunctionClass.removeRoutFile(rscriptpath);
 //          System.out.println("monitor position:"+rscriptpath);
          System.out.println("Your plot is located in "+plotpath);
      } catch (IOException ex) {
