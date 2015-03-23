@@ -160,6 +160,7 @@ public class Console {
                 System.out.println(" \r\n\t\t-isKey\t Display colorkey legend or not : T/F \r\n");
                 System.out.println(" \r\n\t\t-isText\t Display numbers or not: T/F\r\n");
                 System.out.println(" \r\n\t\t-defineColor\t Set heatmap color with strins: like: green,blue,red(comma seperated )\r\n");
+                 System.out.println(" \r\n\t\t-headN\t Set number of rows in your data to be plot: default 30\r\n");
             } else {
                 DrawHeatmap heatmap = new DrawHeatmap(args[1]);
                 if (FunctionClass.getArgsParameter(args, "-out") != null) {
@@ -174,6 +175,10 @@ public class Console {
                 if (FunctionClass.getArgsParameter(args, "-defineColor") != null) {
                     heatmap.setColorlist(FunctionClass.getArgsParameter(args, "-defineColor"));
                 }
+                 if (FunctionClass.getArgsParameter(args, "-headN") != null) {
+                    heatmap.setHeadnumber(Integer.parseInt(FunctionClass.getArgsParameter(args, "-headN")));
+                }
+                
                 heatmap.process();
             }
 

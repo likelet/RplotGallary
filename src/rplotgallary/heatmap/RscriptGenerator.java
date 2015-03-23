@@ -69,7 +69,6 @@ public class RscriptGenerator {
                 str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+")\r\n"; 
            
             }
-            str += "stackedBarP(df)\r\n";
             str += "dev.off()\r\n";
 
             fw.append(str);
