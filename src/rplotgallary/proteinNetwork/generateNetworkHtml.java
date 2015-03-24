@@ -11,11 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.web.WebView;
+//import javafx.scene.web.WebView;
 import javax.imageio.ImageIO;
 import rplotgallary.pub.ImageFrame;
 import rplotgallary.pub.Rexe;
-import test.Browser;
+//import test.Browser;
 
 /**
  *
