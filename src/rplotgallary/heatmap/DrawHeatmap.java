@@ -48,7 +48,7 @@ public class DrawHeatmap {
                 new ImageFrame(img);
             }
 
-//          FunctionClass.removeRoutFile(rscriptpath);
+          FunctionClass.removeRoutFile(rscriptpath);
             System.out.println("Your plot is located in " + plotpath);
         } catch (IOException ex) {
             Logger.getLogger(DrawHeatmap.class.getName()).log(Level.SEVERE, null, ex);

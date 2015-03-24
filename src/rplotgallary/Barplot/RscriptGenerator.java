@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rplotgallary.pub.Console;
 
 /**
  *
@@ -95,7 +96,13 @@ public class RscriptGenerator {
                     + "    )\n"
                     + "  print(p)\n"
                     + "}  \r\n";
-            str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
+            //change figure residue
+            if(Console.iscale.equalsIgnoreCase("small")){
+                str += "png(\"" + plotpath + "\")\r\n";
+            
+            }else{
+                 str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
+            }
             str += "stackedBarP(df)\r\n";
             str += "dev.off()\r\n";
 

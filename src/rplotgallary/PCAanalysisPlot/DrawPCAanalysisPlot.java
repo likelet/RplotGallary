@@ -47,7 +47,7 @@ public class DrawPCAanalysisPlot {
          RscriptGenerator rg=new RscriptGenerator(datafile, conditionstr, outpath);
          rg.setIsText(isText2);
          String rscriptpath=rg.getRscriptpath();
-         System.out.println(rscriptpath);
+//         System.out.println(rscriptpath);
          String plotpath=rg.getPlotpath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isgui){
@@ -68,7 +68,7 @@ public class DrawPCAanalysisPlot {
          }
          RscriptGenerator rg=new RscriptGenerator(datafile, conditionstr, isText2, outpath,PClist);
          String rscriptpath=rg.getRscriptpath();
-         System.out.println(rscriptpath);
+//         System.out.println(rscriptpath);
          String plotpath=rg.getPlotpath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isgui){
@@ -97,7 +97,7 @@ public class DrawPCAanalysisPlot {
          String rscriptpath=rg.getRscriptpath();
          
          
-         System.out.println(rscriptpath);
+//         System.out.println(rscriptpath);
          String plotpath=rg.getPlotpath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isGui){

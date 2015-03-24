@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rplotgallary.pub.Console;
 
 /**
  *
@@ -62,7 +63,14 @@ public class RscriptGenerator {
 
             str += "df<-read.csv(\"" + datapath + "\",header=T,row.names=1)\r\n";
             str += "df<-head(df,n="+this.headnumber+")\r\n";
-            str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
+             //change figure residue
+            if(Console.iscale.equalsIgnoreCase("small")){
+                str += "png(\"" + plotpath + "\")\r\n";
+            
+            }else{
+                 str += "png(\"" + plotpath + "\", type=\"cairo\",units=\"in\",width = 10, height = 10,pointsize=5.2,res=300)\r\n";
+            }
+            
             if(this.displaynumber){
             str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+",display_numbers = TRUE,number_format =\"%.1e\")\r\n"; 
             }else{
@@ -81,7 +89,7 @@ public class RscriptGenerator {
     }
 
     public String getRscriptpath() {
-        System.out.println(Rscriptpath.getAbsolutePath());
+//        System.out.println(Rscriptpath.getAbsolutePath());
         return Rscriptpath.getAbsolutePath();
     }
 
