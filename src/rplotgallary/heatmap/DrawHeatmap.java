@@ -97,7 +97,7 @@ public class DrawHeatmap {
             rg.setDisplaynumber(displaynumber2);
             rg.setIskey(iskey2);
             rg.setHeadnumber(headnumber);
-            
+            rg.process();
             String rscriptpath = rg.getRscriptpath();
             String plotpath = rg.getPlotpath();
             Rexe rexe = new Rexe(rscriptpath, true);
@@ -140,6 +140,12 @@ public class DrawHeatmap {
     
     public static void main(String[] args) {
 //      new DrawHeatmap("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv","C:\\Users\\Administrator\\Desktop\\fornie\\heatmap",true);
-        new DrawHeatmap("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv", 50, "T", "F", "C:\\Users\\Administrator\\Desktop\\fornie\\heatmap", true);
+        DrawHeatmap dh=new DrawHeatmap("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv");
+        dh.setColorlist("green,white,red");
+        dh.setOutpath("C:\\Users\\Administrator\\Desktop\\fornie\\heatmap");
+        dh.isgui=true;
+        dh.setDisplaynumber("F");
+        dh.setHeadnumber(20);
+        dh.process();
     }
 }
