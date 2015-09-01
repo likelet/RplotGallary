@@ -48,7 +48,7 @@ public class DrawHeatmap {
                 new ImageFrame(img);
             }
 
-          FunctionClass.removeRoutFile(rscriptpath);
+//          FunctionClass.removeRoutFile(rscriptpath);
             System.out.println("Your plot is located in " + plotpath);
         } catch (IOException ex) {
             Logger.getLogger(DrawHeatmap.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,6 +68,7 @@ public class DrawHeatmap {
             }
             RscriptGenerator rg = new RscriptGenerator(datafile, headnumber, iskey, displaynumber2, outpath);
             String rscriptpath = rg.getRscriptpath();
+            System.out.println(rscriptpath);
             String plotpath = rg.getPlotpath();
             Rexe rexe = new Rexe(rscriptpath, true);
             if (isgui) {
@@ -99,6 +100,7 @@ public class DrawHeatmap {
             rg.setHeadnumber(headnumber);
             rg.process();
             String rscriptpath = rg.getRscriptpath();
+            System.out.println(rscriptpath);
             String plotpath = rg.getPlotpath();
             Rexe rexe = new Rexe(rscriptpath, true);
             if (isgui) {
@@ -140,10 +142,10 @@ public class DrawHeatmap {
     
     public static void main(String[] args) {
 //      new DrawHeatmap("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv","C:\\Users\\Administrator\\Desktop\\fornie\\heatmap",true);
-        DrawHeatmap dh=new DrawHeatmap("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv");
-        dh.setColorlist("green,white,red");
-        dh.setOutpath("C:\\Users\\Administrator\\Desktop\\fornie\\heatmap");
-        dh.isgui=true;
+        DrawHeatmap dh=new DrawHeatmap("F:\\resouces\\projects\\yumicao\\dataanalysis\\forheatmap.txt");
+        dh.setColorlist("blue,white,red");
+        dh.setOutpath("F:\\resouces\\projects\\yumicao\\dataanalysis\\heatmap");
+        dh.isgui=false;
         dh.setDisplaynumber("F");
         dh.setHeadnumber(20);
         dh.process();

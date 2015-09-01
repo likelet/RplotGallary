@@ -33,7 +33,7 @@ public class RscriptGenerator {
 
         String str = "";
         Rscriptpath = File.createTempFile("tempR", ".R");
-        Rscriptpath.deleteOnExit();
+//        Rscriptpath.deleteOnExit();
         FileWriter fw = new FileWriter(Rscriptpath);
 
         //System.out.println(intervalstr+"\r\n"+integerstri);

@@ -45,7 +45,7 @@ public class RscriptGenerator {
 
         String str = "";
         Rscriptpath = File.createTempFile("tempR", ".R");
-        Rscriptpath.deleteOnExit();
+//        Rscriptpath.deleteOnExit();
         FileWriter fw = new FileWriter(Rscriptpath);
         String colorstr=" colorRampPalette(c(\""+colorlist[0]+"\",\""+colorlist[1]+"\",\""+colorlist[2]+"\"))(100)";
 
@@ -72,9 +72,9 @@ public class RscriptGenerator {
             }
             
             if(this.displaynumber){
-            str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+",display_numbers = TRUE,number_format =\"%.1e\")\r\n"; 
+            str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),cluster_cols = FALSE,legend="+this.iskey+",display_numbers = TRUE,number_format =\"%.1e\")\r\n"; 
             }else{
-                str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),legend="+this.iskey+")\r\n"; 
+                str += "pheatmap(df, trace=\"none\",color="+colorstr+",border_color=\"white\",margin=c(13, 13),cluster_cols = FALSE,legend="+this.iskey+")\r\n"; 
            
             }
             str += "dev.off()\r\n";

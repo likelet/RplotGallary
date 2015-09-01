@@ -97,7 +97,7 @@ public class DrawPCAanalysisPlot {
          String rscriptpath=rg.getRscriptpath();
          
          
-//         System.out.println(rscriptpath);
+         System.out.println(rscriptpath);
          String plotpath=rg.getPlotpath();
          Rexe rexe=new Rexe(rscriptpath,true);
           if(isGui){
@@ -136,7 +136,7 @@ public class DrawPCAanalysisPlot {
   
  
     public static void main(String[] args) {
-     DrawPCAanalysisPlot test=new DrawPCAanalysisPlot("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv","C,C,C,T,T,T"); 
+     DrawPCAanalysisPlot test=new DrawPCAanalysisPlot("F:\\resouces\\projects\\yumicao\\dataanalysis\\gene_matrix.TMM.fpkm.matrix","Control,Control,Cold,Cold,Dry,Dry"); 
      test.setIsGui(true);
      test.setIsText("T");
      test.setPClist("PC1,PC2");

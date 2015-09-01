@@ -93,7 +93,7 @@ public class RscriptGenerator {
 
         String str = "";
         Rscriptpath = File.createTempFile("tempR", ".R");
-        Rscriptpath.deleteOnExit();
+//        Rscriptpath.deleteOnExit();
         FileWriter fw = new FileWriter(Rscriptpath);
 
         //System.out.println(intervalstr+"\r\n"+integerstri);
@@ -111,7 +111,7 @@ public class RscriptGenerator {
             str += "library(scales)\r\n";
             str += "library(grid)\r\n";
             str += "library(FactoMineR)\r\n";
-            str += "df<-read.csv(\"" + datapath + "\",header=T,row.names=1)\r\n";
+            str += "df<-read.csv(\"" + datapath + "\",header=T,row.names=1,sep=\",\")\r\n";
 
             str += "#convert userinput data and condition list for PCA analysis\n"
                     + "dataForPCAinitialize<-function(data,conditionlist){\n"
@@ -124,11 +124,11 @@ public class RscriptGenerator {
                     + "getPCAplot <- function(data,conditionlist,isText=FALSE){\n"
                     + "    a<-dataForPCAinitialize(data,conditionlist)\n"
                     + "    pca <-PCA(a[,2:ncol(a)], scale.unit=T, graph=F)\n"
-                    + "    ctri<-pca$eig[,2]\n"
-                    + "    names(ctri)<-c(\"PC1\",\"PC2\",\"PC3\",\"PC4\",\"PC5\")\n"
+                    + "    ctri<-pca$eig[,2][1:3]\n"    
+                    +"       names(ctri)<-c(\"PC1\",\"PC2\",\"PC3\")\n"
                     + "    xlabtemp=paste(\"" + this.plotdim[0] + " (\",round(ctri[\"" + this.plotdim[0] + "\"],2),\"%)\",sep=\"\")\n"
                     + "    ylabtemp=paste(\"" + this.plotdim[1] + " (\",round(ctri[\"" + this.plotdim[1] + "\"],2),\"%)\",sep=\"\")\n"
-                    + "    colnames(pca$ind$coord)<-c(\"PC1\",\"PC2\",\"PC3\",\"PC4\",\"PC5\")\n"
+                    + "    colnames(pca$ind$coord)[1:3]<-c(\"PC1\",\"PC2\",\"PC3\")\n"
                     + "    " + this.plotdim[0] + " <- pca$ind$coord[,\"" + this.plotdim[0] + "\"]\n"
                     + "    " + this.plotdim[1] + " <- pca$ind$coord[,\"" + this.plotdim[1] + "\"]\n"
                     + "    maxX=max(" + this.plotdim[0] + ")*1.5\n"
@@ -146,7 +146,7 @@ public class RscriptGenerator {
                     + "      theme(legend.text = element_text(colour=\"blue\", size = 16, face = \"bold\")) + \n"
                     + "      theme(legend.justification=c(1,0),legend.position=\"top\")+\n"
                     + "      theme(legend.title = element_text(colour=\"black\", size=16, face=\"bold\"))+\n"
-                    + "      scale_fill_brewer(palette=\"Spectral\")\n"
+                    + "      scale_color_brewer(palette=\"Spectral\")\n"
                     + "    if(isText){\n"
                     + "      plot<-plot+geom_text(aes(label=rownames(plotdata)), size=5, hjust=0.5, vjust=-0.5)\n"
                     + "    }\n"
@@ -187,9 +187,7 @@ public class RscriptGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        //ArrayList<String> list1=Lengthdistribution.getIntervalList(0, 3000, 300);
-        //ArrayList<Integer> list2=Lengthdistribution.findInterval(0, 3000, 300, "F:\\mywork\\project\\玉瑾\\Trinity.fasta", true);
-//       new RscriptGenerator("C:\\Users\\Administrator\\Desktop\\fornie\\Count Matrix1.csv", "C:\\Users\\Administrator\\Desktop\\fornie");
+  
 
     }
 }
