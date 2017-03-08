@@ -37,7 +37,7 @@ public class Console {
         }
 
         if (args.length == 0) {
-            System.out.println("Rplot tools, version  " + version + "\r\n");
+            System.out.println("RplotGallary, version  " + version + "\r\n");
              System.out.println("Please input args\n Type "
                     + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar ")
                     + ToolsforCMD.print_ansi_CYAN("-h")
@@ -51,17 +51,14 @@ public class Console {
                     + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
 //            System.out.println("======Draw boxplot:  \r\n\t\tCMD : java -jar RplotGallary.jar -boxplot datafile [outputpath] isgui(T/F)");
            
-            System.out.println("======Draw correlation plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -correlation datafile samplename1 samplename2 [outputpath] isgui(T/F)");
             System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw correlation plot:   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -boxplot")
                     + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
             
-            System.out.println("======Draw PCA analysis & plot(M):  \r\n\t\tCMD : java -jar RplotGallary.jar -pca datafile conditionstr(like:Control,Control,Control,Treated,Treated,Treated) [parameters]");
             System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw PCA analysis &  plot:   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -pca")
                     + ToolsforCMD.print_ansi_CYAN(" <datafile> <conditionstr(like:Control,Control,Control,Treated,Treated,Treated)> [parameters]"));
             
-            System.out.println("======Draw Stack plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -stack datafile [outputpath] isgui(T/F)");
             System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw Stack plot:   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -boxplot")
                     + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
