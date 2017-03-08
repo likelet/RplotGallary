@@ -30,24 +30,53 @@ public class Console {
     public static String iscale = "big";
 
     public static void main(String[] args) throws IOException, FileNotFoundException, ParserConfigurationException {
+        long start =   System.nanoTime();
+        String version = "1.4.1";
         if (FunctionClass.getArgsParameter(args, "-scale") != null) {
             Console.iscale = FunctionClass.getArgsParameter(args, "-scale");
         }
 
         if (args.length == 0) {
-            System.out.println("Rplot tools, version 1.4.1");
-
-            System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help");
+            System.out.println("Rplot tools, version  " + version + "\r\n");
+             System.out.println("Please input args\n Type "
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar ")
+                    + ToolsforCMD.print_ansi_CYAN("-h")
+                    + " for help\r\n");
+//            System.out.println("please input args\n type java -jar RplotGallary.jar -h for help");
         } else if (args[0].endsWith("-h")) {
-            System.out.println("Java based Data plot tool, version 1.2");
-            System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help");
-            System.out.println("======Draw boxplot:  \r\n\t\tCMD : java -jar RplotGallary.jar -boxplot datafile [outputpath] isgui(T/F)");
+            System.out.println("Rplot tools, version  " + version + "\r\n");
+            System.out.println("please input args\n type java -jar RplotGallary.jar -h for help");
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw boxplot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -boxplot")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
+//            System.out.println("======Draw boxplot:  \r\n\t\tCMD : java -jar RplotGallary.jar -boxplot datafile [outputpath] isgui(T/F)");
+           
             System.out.println("======Draw correlation plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -correlation datafile samplename1 samplename2 [outputpath] isgui(T/F)");
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw correlation plot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -boxplot")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
+            
             System.out.println("======Draw PCA analysis & plot(M):  \r\n\t\tCMD : java -jar RplotGallary.jar -pca datafile conditionstr(like:Control,Control,Control,Treated,Treated,Treated) [parameters]");
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw PCA analysis &  plot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -pca")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile> <conditionstr(like:Control,Control,Control,Treated,Treated,Treated)> [parameters]"));
+            
             System.out.println("======Draw Stack plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -stack datafile [outputpath] isgui(T/F)");
-            System.out.println("======Draw barRatio plot:  \r\n\t\tCMD : java -jar RplotGallary.jar -barRatio datafile [outputpath] isgui(T/F)");
-            System.out.println("======Draw heatmap plot(M):  \r\n\t\tCMD : java -jar RplotGallary.jar -heatmap datafile(T/F)");
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw Stack plot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -boxplot")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
+            
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw barRatio plot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -barRatio")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile> [outputpath] <isgui(T/F)>"));
+            
+            System.out.println(ToolsforCMD.print_ansi_YELLOW("======Draw heatmap plot:   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar RplotGallary.jar -heatmap")
+                    + ToolsforCMD.print_ansi_CYAN(" <datafile(T/F)>"));
+            
             System.out.println("Type -updateinfor to view update information");
+            
+            
             System.out.println("Funcion with (M) followed indicates that there are more parameters can be set by typing -h");
             System.out.println(" ===================================================================");
             System.out.println("           Authored by Qi ZHAO. email: zhaoqi3@mail2.sysu.edu.cn\n"

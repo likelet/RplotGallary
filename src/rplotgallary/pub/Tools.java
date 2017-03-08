@@ -31,6 +31,8 @@ public class Tools {
     public final static String AA = "ARNDCQEGHILKMFPSTWYVBZX*";
     public static HashMap<Character, Integer> aaMap = getAAMap();
     public static String CURRENT_FILE_PATH = getCurrentFilePath();
+    public static int thread=java.lang.Thread.activeCount();
+     private static boolean TRUNCATE_NAMES_AT_WHITESPACE=true;
 
     public static HashMap<Character, Integer> getAAMap() {
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
@@ -340,5 +342,21 @@ public class Tools {
     public static int[][] InitialMatrix(String fileName) {
         String filePath = "/pub/" + fileName + ".matrix";
         return MatrixReader(filePath);
+    }
+    public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)" + regex + "(?!.*?" + regex + ")", replacement);
+    }
+
+    public static String gePISseekerStr(){
+        String str="==============================================================\n"+
+                  "     ######     #                                      \n" +
+                  "     #     #   # #   #####  ####   ####  #       ####  \n" +
+                  "     #     #  #   #    #   #    # #    # #      #      \n" +
+                  "     #     # #     #   #   #    # #    # #       ####  \n" +
+                  "     #     # #######   #   #    # #    # #           # \n" +
+                  "     #     # #     #   #   #    # #    # #      #    # \n" +
+                  "     ######  #     #   #    ####   ####  ######  ####  \n" +
+                  "================================================================\n";
+        return str;
     }
 }
